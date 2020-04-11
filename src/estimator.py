@@ -21,43 +21,47 @@ def estimator(data):
     severe_currently_infected = reported_cases * 50
 
     # Infections by requested time for both mild and severe scenarios
-    mild_infections_by_requested_time = mild_currenty_infected * \
-        number_of_days_in_period(data["periodType"], data["timeToElapse"])
+    mild_infections_by_requested_time = int(mild_currenty_infected *
+                                            2 ** (number_of_days_in_period(data["periodType"],
+                                                                           data["timeToElapse"]) // 3))
 
-    severe_infections_by_requested_time = severe_currently_infected * \
-        number_of_days_in_period(data["periodType"], data["timeToElapse"])
+    severe_infections_by_requested_time = int(severe_currently_infected *
+                                              2 ** (number_of_days_in_period(data["periodType"],
+                                                                             data["timeToElapse"]) // 3))
 
     # Severe positive cases by requested time for both mild and severe scenarios
-    mild_severe_cases_by_requested_time = 0.15 * mild_infections_by_requested_time
-    severe_severe_cases_by_requested_time = 0.15 * \
-        severe_infections_by_requested_time
+    mild_severe_cases_by_requested_time = int(
+        0.15 * mild_infections_by_requested_time)
+    severe_severe_cases_by_requested_time = int(
+        0.15 * severe_infections_by_requested_time)
 
     # Available hospital beds for severe cases for both mild and severe scenarios
-    mild_hospital_beds_requested_time = (
-        data["totalHospitalBeds"] * 0.35) - mild_severe_cases_by_requested_time
+    mild_hospital_beds_requested_time = int((
+        data["totalHospitalBeds"] * 0.35) - mild_severe_cases_by_requested_time)
 
-    severe_hospital_beds_requested_time = (
-        data["totalHospitalBeds"] * 0.35) - severe_severe_cases_by_requested_time
+    severe_hospital_beds_requested_time = int((
+        data["totalHospitalBeds"] * 0.35) - severe_severe_cases_by_requested_time)
 
     # Severe positive cases that will require ICU for both mild and severe scenarios
-    mild_cases_for_ICU_by_requested_time = 0.05 * mild_infections_by_requested_time
+    mild_cases_for_ICU_by_requested_time = int(
+        0.05 * mild_infections_by_requested_time)
 
-    severe_cases_for_ICU_by_requested_time = 0.05 * \
-        severe_infections_by_requested_time
+    severe_cases_for_ICU_by_requested_time = int(0.05 *
+                                                 severe_infections_by_requested_time)
 
     # Severe positive cases that will require ventilators for both mild and severe scenarios
-    mild_cases_for_ventilators_by_requested_time = 0.02 * \
-        mild_infections_by_requested_time
+    mild_cases_for_ventilators_by_requested_time = int(0.02 *
+                                                       mild_infections_by_requested_time)
 
-    severe_cases_for_ventilators_by_requested_time = 0.02 * \
-        severe_infections_by_requested_time
+    severe_cases_for_ventilators_by_requested_time = int(0.02 *
+                                                         severe_infections_by_requested_time)
 
     # Dollars in Flight for both mild and severe impact scenarios
-    mild_dollars_in_flight = (mild_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
-                              data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"])
+    mild_dollars_in_flight = int((mild_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
+                                  data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"]))
 
-    severe_dollars_in_flight = (severe_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
-                                data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"])
+    severe_dollars_in_flight = int((severe_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
+                                    data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"]))
 
     # Response data
     results = {
