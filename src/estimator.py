@@ -39,6 +39,27 @@ def estimator(data):
     severe_hospital_beds_requested_time = (
         data["totalHospitalBeds"] * 0.35) - severe_severe_cases_by_requested_time
 
+    # Severe positive cases that will require ICU for both mild and severe scenarios
+    mild_cases_for_ICU_by_requested_time = 0.05 * mild_infections_by_requested_time
+
+    severe_cases_for_ICU_by_requested_time = 0.05 * \
+        severe_infections_by_requested_time
+
+    # Severe positive cases that will require ventilators for both mild and severe scenarios
+    mild_cases_for_ventilators_by_requested_time = 0.02 * \
+        mild_infections_by_requested_time
+
+    severe_cases_for_ventilators_by_requested_time = 0.02 * \
+        severe_infections_by_requested_time
+
+    # Dollars in Flight for both mild and severe impact scenarios
+    mild_dollars_in_flight = (mild_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
+                              data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"])
+
+    severe_dollars_in_flight = (severe_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
+                                data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"])
+
+    # Response data
     results = {
         "data": data,
 
@@ -46,14 +67,37 @@ def estimator(data):
             "currentyInfected": mild_currenty_infected,
             "infectionsByRequestedTime": mild_infections_by_requested_time,
             "hospitalBedsByRequestedTime": mild_hospital_beds_requested_time,
-            "severeCasesByRequestedTime": mild_severe_cases_by_requested_time
+            "severeCasesByRequestedTime": mild_severe_cases_by_requested_time,
+            "casesForICUByRequestedTime": mild_cases_for_ICU_by_requested_time,
+            "casesForVentilatorsByRequestedTime": mild_cases_for_ventilators_by_requested_time,
+            "dollarsInFlight": mild_dollars_in_flight
         },
 
         "severeImpact": {
             "currentyInfected": severe_currently_infected,
             "infectionsByRequestedTime": severe_infections_by_requested_time,
             "hospitalBedsByRequestedTime": severe_hospital_beds_requested_time,
-            "severeCasesByRequestedTime": severe_severe_cases_by_requested_time
+            "severeCasesByRequestedTime": severe_severe_cases_by_requested_time,
+            "casesForICUByRequestedTime": severe_cases_for_ICU_by_requested_time,
+            "casesForVentilatorsByRequestedTime": severe_cases_for_ventilators_by_requested_time,
+            "dollarsInFlight": severe_dollars_in_flight
         }
     }
     return results
+
+
+data = {
+    "region": {
+        "name": 'Africa',
+        "avgAge": 19.7,
+        "avgDailyIncomeInUSD": 1,
+        "avgDailyIncomePopulation": 0.73
+    },
+    "periodType": 'months',
+    "timeToElapse": 2,
+    "reportedCases": 445,
+    "population": 4578803,
+    "totalHospitalBeds": 172637
+}
+
+print(estimator(data))
