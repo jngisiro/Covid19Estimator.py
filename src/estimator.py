@@ -16,47 +16,44 @@ def estimator(data):
 
     reported_cases = data['reportedCases']
 
-    # Currently infected calculations for both mild and severe impact
+    # Currently infected calculations for both mild and severe scenarios
     mild_currenty_infected = reported_cases * 10
     severe_currently_infected = reported_cases * 50
 
-    # Infections by requested time for both mild and severe impact
+    # Infections by requested time for both mild and severe scenarios
     mild_infections_by_requested_time = mild_currenty_infected * \
         number_of_days_in_period(data["periodType"], data["timeToElapse"])
 
     severe_infections_by_requested_time = severe_currently_infected * \
         number_of_days_in_period(data["periodType"], data["timeToElapse"])
 
+    # Severe positive cases by requested time for both mild and severe scenarios
+    mild_severe_cases_by_requested_time = 0.15 * mild_infections_by_requested_time
+    severe_severe_cases_by_requested_time = 0.15 * \
+        severe_infections_by_requested_time
+
+    # Available hospital beds for severe cases for both mild and severe scenarios
+    mild_hospital_beds_requested_time = (
+        data["totalHospitalBeds"] * 0.35) - mild_severe_cases_by_requested_time
+
+    severe_hospital_beds_requested_time = (
+        data["totalHospitalBeds"] * 0.35) - severe_severe_cases_by_requested_time
+
     results = {
         "data": data,
 
         "impact": {
             "currentyInfected": mild_currenty_infected,
-            "infectionsByRequestedTime": mild_infections_by_requested_time
+            "infectionsByRequestedTime": mild_infections_by_requested_time,
+            "hospitalBedsByRequestedTime": mild_hospital_beds_requested_time,
+            "severeCasesByRequestedTime": mild_severe_cases_by_requested_time
         },
 
         "severeImpact": {
             "currentyInfected": severe_currently_infected,
-            "infectionsByRequestedTime": severe_infections_by_requested_time
+            "infectionsByRequestedTime": severe_infections_by_requested_time,
+            "hospitalBedsByRequestedTime": severe_hospital_beds_requested_time,
+            "severeCasesByRequestedTime": severe_severe_cases_by_requested_time
         }
     }
     return results
-
-
-data = {
-    'region': {
-        'name': 'Africa',
-        'avgAge': 19.7,
-        'avgDailyIncomeInUSD': 5,
-        'avgDailyIncomePopulation': 0.71
-    },
-    'periodType': 'days',
-    'timeToElapse': 28,
-    'reportedCases': 674,
-    'population': 66622705,
-    'totalHospitalBeds': 1380614
-
-
-}
-
-print(estimator(data))
