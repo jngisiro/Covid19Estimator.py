@@ -18,6 +18,11 @@ app.logger.setLevel(logging.WARNING)
 app.logger.addHandler(handler)
 
 
+@app.route("/", methods=["GET"])
+def index():
+    return "<h2>Covid 19 Estimator</h2>"
+
+
 @app.route("/api/v1/on-covid-19", methods=["POST"])
 @app.route("/api/v1/on-covid-19/json", methods=["POST"])
 def make_estimate():
