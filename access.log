@@ -1,0 +1,8 @@
+Web Application Log
+INFO - ::1 - - [2020-04-12 21:31:48] "POST /api/v1/on-covid-19 HTTP/1.1" 200 873 0.000998
+INFO - ::1 - - [2020-04-12 21:31:55] "POST /api/v1/on-covid-19/json HTTP/1.1" 200 873 0.001002
+INFO - ::1 - - [2020-04-12 21:32:00] "POST /api/v1/on-covid-19/xml HTTP/1.1" 200 1441 0.042025
+INFO - ::1 - - [2020-04-12 21:32:27] "POST /api/v1/on-covid-19/logs HTTP/1.1" 405 338 0.000998
+INFO - ::1 - - [2020-04-12 21:32:33] "GET /api/v1/on-covid-19/logs HTTP/1.1" 200 513 0.009964
+INFO - ::1 - - [2020-04-12 21:32:45] "GET /api/v1/on-covid-19/logs HTTP/1.1" 200 607 0.011997
+INFO - ::1 - - [2020-04-12 21:32:58] "GET /api/v1/on-covid-19/logs HTTP/1.1" 200 701 0.013994

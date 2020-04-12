@@ -43,7 +43,8 @@ def make_estimate():
 @app.route("/api/v1/on-covid-19/xml", methods=["POST"])
 def make_estimate_json():
     input_data = request.json
-    response = make_response(dicttoxml(estimator(input_data)))
+    response = make_response(
+        dicttoxml(estimator(input_data), custom_root="response", attr_type=False))
     response.mimetype = "text/xml"
     return response
 
