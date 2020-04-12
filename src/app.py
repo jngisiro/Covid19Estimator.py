@@ -11,11 +11,11 @@ from estimator import estimator
 app = flask.Flask(__name__)
 
 # create a file to store weblogs
-log = open("access.log", 'w')
-log.seek(0)
-log.truncate()
-log.write("Web Application Log\n")
-log.close()
+# log = open("access.log", 'w')
+# log.seek(0)
+# log.truncate()
+# log.write("Web Application Log\n")
+# log.close()
 
 log_handler = logging.handlers.RotatingFileHandler(
     "access.log", maxBytes=1000000, backupCount=1)
@@ -33,14 +33,14 @@ def index():
     return "<h2>Covid 19 Estimator</h2>"
 
 
-@app.route("/api/v1/on-covid-19", methods=["POST"])
-@app.route("/api/v1/on-covid-19/json", methods=["POST"])
+@app.route("/api/v1/on-covid-19/", methods=["POST"])
+@app.route("/api/v1/on-covid-19/json/", methods=["POST"])
 def make_estimate():
     input_data = request.json
     return jsonify(estimator(input_data))
 
 
-@app.route("/api/v1/on-covid-19/xml", methods=["POST"])
+@app.route("/api/v1/on-covid-19/xml/", methods=["POST"])
 def make_estimate_json():
     input_data = request.json
     response = make_response(
@@ -49,7 +49,7 @@ def make_estimate_json():
     return response
 
 
-@app.route("/api/v1/on-covid-19/logs", methods=["GET"])
+@app.route("/api/v1/on-covid-19/logs/", methods=["GET"])
 def get_logs():
     logs = open("access.log", "r")
     response = make_response(logs.read())
