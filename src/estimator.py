@@ -88,20 +88,3 @@ def estimator(data):
         }
     }
     return results
-
-
-data = {
-    "region": {
-        "name": 'Africa',
-        "avgAge": 19.7,
-        "avgDailyIncomeInUSD": 1,
-        "avgDailyIncomePopulation": 0.73
-    },
-    "periodType": 'months',
-    "timeToElapse": 2,
-    "reportedCases": 445,
-    "population": 4578803,
-    "totalHospitalBeds": 172637
-}
-
-print(estimator(data))
