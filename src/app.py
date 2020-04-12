@@ -17,8 +17,8 @@ app = flask.Flask(__name__)
 # log.write("Web Application Log\n")
 # log.close()
 
-log_handler = logging.handlers.RotatingFileHandler(
-    "access.log", maxBytes=1000000, backupCount=1)
+log_handler = logging.handlers.WatchedFileHandler(
+    "access.log")
 
 formatter = logging.Formatter(
     "%(levelname)s - %(message)s"
