@@ -57,6 +57,5 @@ def get_logs():
     return response
 
 
-if __name__ == '__main__':
-    http_server = WSGIServer(('', 5000), app, log=app.logger)
-    http_server.serve_forever()
+http_server = WSGIServer(('', 5000), app, log=app.logger)
+http_server.serve_forever()
