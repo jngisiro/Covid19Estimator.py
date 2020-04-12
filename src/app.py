@@ -24,7 +24,7 @@ formatter = logging.Formatter(
     "%(levelname)s - %(message)s"
 )
 log_handler.setFormatter(formatter)
-app.logger.setLevel(logging.DEBUG)
+app.logger.setLevel(logging.INFO)
 app.logger.addHandler(log_handler)
 
 
