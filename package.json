@@ -5,7 +5,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "py src/app.py"
   },
   "devDependencies": {
     "jest": "^25.2.7",

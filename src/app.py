@@ -3,7 +3,7 @@ import logging
 import logging.handlers
 from json import loads
 from dicttoxml import dicttoxml
-from flask import request, jsonify, send_from_directory
+from flask import request, jsonify, send_from_directory, make_response
 from gevent.pywsgi import WSGIServer
 
 from estimator import estimator
@@ -43,13 +43,17 @@ def make_estimate():
 @app.route("/api/v1/on-covid-19/xml", methods=["POST"])
 def make_estimate_json():
     input_data = request.json
-    return dicttoxml(estimator(input_data))
+    response = make_response(dicttoxml(estimator(input_data)))
+    response.mimetype = "text/xml"
+    return response
 
 
 @app.route("/api/v1/on-covid-19/logs", methods=["GET"])
 def get_logs():
     logs = open("access.log", "r")
-    return logs.read()
+    response = make_response(logs.read())
+    response.mimetype = "text/plain"
+    return response
 
 
 if __name__ == '__main__':
