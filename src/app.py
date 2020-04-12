@@ -10,12 +10,12 @@ from estimator import estimator
 
 app = flask.Flask(__name__)
 
-create a file to store weblogs
-log = open("access.log", 'w')
-log.seek(0)
-log.truncate()
-log.write("Web Application Log\n")
-log.close()
+# create a file to store weblogs
+# log = open("access.log", 'w')
+# log.seek(0)
+# log.truncate()
+# log.write("Web Application Log\n")
+# log.close()
 
 log_handler = logging.handlers.RotatingFileHandler(
     "access.log", maxBytes=1000000, backupCount=1)
@@ -57,5 +57,6 @@ def get_logs():
     return response
 
 
-http_server = WSGIServer(('', 5000), app, log=app.logger)
-http_server.serve_forever()
+if __name__ == '__main__':
+    http_server = WSGIServer(('', 5000), app, log=app.logger)
+    http_server.serve_forever()
