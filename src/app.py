@@ -40,4 +40,5 @@ def get_logs():
     return send_from_directory("./", "access.log")
 
 
+app.config["DEBUG"] = False
 app.run()
