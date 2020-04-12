@@ -10,12 +10,22 @@ from estimator import estimator
 
 app = flask.Flask(__name__)
 
-handler = logging.handlers.RotatingFileHandler(
-    "access.log", maxBytes=1024*1024)
-logging.getLogger("werkzeug").setLevel(logging.DEBUG)
-logging.getLogger("werkzeug").addHandler(handler)
-app.logger.setLevel(logging.WARNING)
-app.logger.addHandler(handler)
+# create a file to store weblogs
+log = open("access.log", 'w')
+log.seek(0)
+log.truncate()
+log.write("Web Application Log\n")
+log.close()
+
+log_handler = logging.handlers.RotatingFileHandler(
+    "access.log", maxBytes=1000000, backupCount=1)
+
+formatter = logging.Formatter(
+    "%(levelname)s - %(message)s"
+)
+log_handler.setFormatter(formatter)
+app.logger.setLevel(logging.DEBUG)
+app.logger.addHandler(log_handler)
 
 
 @app.route("/", methods=["GET"])
@@ -38,12 +48,10 @@ def make_estimate_json():
 
 @app.route("/api/v1/on-covid-19/logs", methods=["GET"])
 def get_logs():
-    return send_from_directory("./", "access.log")
+    logs = open("access.log", "r")
+    return logs.read()
 
 
 if __name__ == '__main__':
-    # Debug/Development
-    # app.run(debug=True, host="0.0.0.0", port="5000")
-    # Production
-    http_server = WSGIServer(('', 5000), app)
+    http_server = WSGIServer(('', 5000), app, log=app.logger)
     http_server.serve_forever()
