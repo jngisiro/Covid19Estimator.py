@@ -1,0 +1,12 @@
+INFO - ::1 - - [2020-04-13 01:42:50] "POST /api/v1/on-covid-19/json HTTP/1.1" 308 490 0.002996
+INFO - ::1 - - [2020-04-13 01:42:50] "POST /api/v1/on-covid-19/json/ HTTP/1.1" 200 873 0.000962
+INFO - ::1 - - [2020-04-13 01:42:55] "POST /api/v1/on-covid-19/ HTTP/1.1" 200 873 0.000998
+INFO - ::1 - - [2020-04-13 01:42:59] "POST /api/v1/on-covid-19/xml HTTP/1.1" 308 487 0.001999
+INFO - ::1 - - [2020-04-13 01:42:59] "POST /api/v1/on-covid-19/xml/ HTTP/1.1" 200 1448 0.078975
+INFO - ::1 - - [2020-04-13 01:43:03] "POST /api/v1/on-covid-19/json HTTP/1.1" 308 490 0.002999
+INFO - ::1 - - [2020-04-13 01:43:03] "POST /api/v1/on-covid-19/json/ HTTP/1.1" 200 873 0.001008
+INFO - ::1 - - [2020-04-13 01:43:09] "POST /api/v1/on-covid-19/xml HTTP/1.1" 308 487 0.001999
+INFO - ::1 - - [2020-04-13 01:43:09] "POST /api/v1/on-covid-19/xml/ HTTP/1.1" 200 1448 0.007998
+INFO - ::1 - - [2020-04-13 01:43:12] "POST /api/v1/on-covid-19/logs HTTP/1.1" 405 338 0.000999
+INFO - ::1 - - [2020-04-13 01:43:18] "GET /api/v1/on-covid-19/logs HTTP/1.1" 308 490 0.001001
+INFO - ::1 - - [2020-04-13 01:43:18] "GET /api/v1/on-covid-19/logs/ HTTP/1.1" 200 1161 0.066984
