@@ -45,7 +45,7 @@ def make_estimate_json():
     input_data = request.json
     response = make_response(
         dicttoxml(estimator(input_data), custom_root="response", attr_type=False))
-    response.mimetype = "applicaiton/xml"
+    response.mimetype = "application/xml"
     return response
 
 
