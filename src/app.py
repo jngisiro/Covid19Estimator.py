@@ -10,12 +10,12 @@ from estimator import estimator
 
 app = flask.Flask(__name__)
 
-# create a file to store weblogs
-# log = open("access.log", 'w')
-# log.seek(0)
-# log.truncate()
-# log.write("Web Application Log\n")
-# log.close()
+create a file to store weblogs
+log = open("access.log", 'w')
+log.seek(0)
+log.truncate()
+log.write("Web Application Log\n")
+log.close()
 
 log_handler = logging.handlers.RotatingFileHandler(
     "access.log", maxBytes=1000000, backupCount=1)
