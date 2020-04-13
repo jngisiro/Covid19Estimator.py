@@ -20,3 +20,6 @@ src/__pycache__
 
 # when you use pytest editable
 covid19_estimator_py.egg-info/
+
+#logs
+*.log

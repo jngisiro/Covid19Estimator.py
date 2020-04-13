@@ -11,20 +11,20 @@ from estimator import estimator
 app = flask.Flask(__name__)
 
 # create a file to store weblogs
-# log = open("access.log", 'w')
-# log.seek(0)
-# log.truncate()
-# log.write("Web Application Log\n")
-# log.close()
+log = open("access.log", 'w')
+log.seek(0)
+log.truncate()
+log.write("Web Application Log\n")
+log.close()
 
-log_handler = logging.handlers.WatchedFileHandler(
-    "access.log")
+log_handler = logging.handlers.RotatingFileHandler(
+    "access.log", maxBytes=1000000, backupCount=1)
 
 formatter = logging.Formatter(
     "%(levelname)s - %(message)s"
 )
 log_handler.setFormatter(formatter)
-app.logger.setLevel(logging.INFO)
+app.logger.setLevel(logging.DEBUG)
 app.logger.addHandler(log_handler)
 
 
