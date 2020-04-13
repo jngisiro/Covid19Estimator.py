@@ -16,7 +16,7 @@ def estimator(data):
 
     reported_cases = data['reportedCases']
 
-    # Currently infected calculations for both mild and severe scenarios
+    # Currently infected calculations for mild and severe scenarios
     mild_currenty_infected = reported_cases * 10
     severe_currently_infected = reported_cases * 50
 
