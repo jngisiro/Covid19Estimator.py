@@ -38,6 +38,7 @@ def index():
 @app.route("/api/v1/on-covid-19/json/", methods=["POST"])
 def make_estimate():
     input_data = request.json
+    logging.debug("App running on PORT: 5000")
     return jsonify(estimator(input_data))
 
 
@@ -47,6 +48,7 @@ def make_estimate_json():
     response = make_response(
         dicttoxml(estimator(input_data), custom_root="response", attr_type=False))
     response.mimetype = "application/xml"
+    logging.debug("App running on PORT: 5000")
     return response
 
 
@@ -55,6 +57,7 @@ def get_logs():
     logs = open("access.log", "r")
     response = make_response(logs.read())
     response.mimetype = "text/plain"
+    logging.debug("App running on PORT: 5000")
     return response
 
 
