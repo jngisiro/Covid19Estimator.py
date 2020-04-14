@@ -24,10 +24,12 @@ app = flask.Flask(__name__)
 #     "%(levelname)s - %(message)s"
 # )
 # log_handler.setFormatter(formatter)
-# app.logger.setLevel(logging.DEBUG)  
+# app.logger.setLevel(logging.DEBUG)
 # app.logger.addHandler(log_handler)
 
-logging.basicConfig(filename="access.log", level=logging.DEBUG, format="%(message)s")
+logging.basicConfig(filename="access.log",
+                    level=logging.DEBUG, format="%(message)s")
+
 
 @app.route("/", methods=["GET"])
 def index():
@@ -38,7 +40,6 @@ def index():
 @app.route("/api/v1/on-covid-19/json/", methods=["POST"])
 def make_estimate():
     input_data = request.json
-    logging.debug("App running on PORT: 5000")
     return jsonify(estimator(input_data))
 
 
@@ -48,7 +49,6 @@ def make_estimate_json():
     response = make_response(
         dicttoxml(estimator(input_data), custom_root="response", attr_type=False))
     response.mimetype = "application/xml"
-    logging.debug("App running on PORT: 5000")
     return response
 
 
@@ -60,7 +60,20 @@ def get_logs():
     return response
 
 
+@app.after_request
+def after_request(response)
+   if response.status_code != 500:
+        ts = strftime('[%Y-%b-%d %H:%M]')
+        logger.debug('%s %s %s %s %s %s',
+                     ts,
+                     request.remote_addr,
+                     request.method,
+                     request.scheme,
+                     request.full_path,
+                     response.status)
+    return response
+
+
 if __name__ == '__main__':
     http_server = WSGIServer(('', 5000), app)
-    logging.debug("App running on PORT: 5000")
     http_server.serve_forever()
