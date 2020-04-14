@@ -78,10 +78,11 @@ def delete_logs():
 def after_request(response):
     if response.status_code != 500:
         ts = "0" + str(int(time() - g.start)) + "ms"
+        code = response.status.split(" ")[0]
         logging.critical('%s %s %s %s',
                          request.method,
                          request.path,
-                         response.status,
+                         code,
                          ts)
         return response
 
