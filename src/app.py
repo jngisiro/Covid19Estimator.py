@@ -3,9 +3,9 @@ import logging
 import logging.handlers
 from json import loads
 from dicttoxml import dicttoxml
-from flask import request, jsonify, send_from_directory, make_response, render_template, url_for
+from flask import request, jsonify, send_from_directory, make_response, render_template, url_for, g
 from gevent.pywsgi import WSGIServer
-from time import strftime
+from time import time
 
 from estimator import estimator
 
@@ -30,6 +30,11 @@ app = flask.Flask(__name__)
 
 logging.basicConfig(filename="access.log",
                     level=logging.CRITICAL, format="%(message)s")
+
+
+@app.before_request
+def before_request():
+    g.start = time()
 
 
 @app.route("/", methods=["GET"])
@@ -72,14 +77,12 @@ def delete_logs():
 @app.after_request
 def after_request(response):
     if response.status_code != 500:
-        ts = strftime('[%Y-%b-%d %H:%M]')
-        logging.critical('%s %s %s %s %s %s',
-                         ts,
-                         request.remote_addr,
+        ts = "0" + str(int(time() - g.start)) + "ms"
+        logging.critical('%s %s %s %s',
                          request.method,
-                         request.scheme,
-                         request.full_path,
-                         response.status)
+                         request.path,
+                         response.status,
+                         ts)
         return response
 
 
