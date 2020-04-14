@@ -17,16 +17,17 @@ app = flask.Flask(__name__)
 # log.write("Web Application Log\n")
 # log.close()
 
-log_handler = logging.handlers.RotatingFileHandler(
-    "access.log", maxBytes=1000000, backupCount=1)
+# log_handler = logging.handlers.RotatingFileHandler(
+#     "access.log", maxBytes=1000000, backupCount=1)
 
-formatter = logging.Formatter(
-    "%(levelname)s - %(message)s"
-)
-log_handler.setFormatter(formatter)
-app.logger.setLevel(logging.DEBUG)
-app.logger.addHandler(log_handler)
+# formatter = logging.Formatter(
+#     "%(levelname)s - %(message)s"
+# )
+# log_handler.setFormatter(formatter)
+# app.logger.setLevel(logging.DEBUG)  
+# app.logger.addHandler(log_handler)
 
+logging.basicConfig(filename="access.log", level=logging.DEBUG, format="%(asctime)s:%(levelname)s:%(message)s")
 
 @app.route("/", methods=["GET"])
 def index():
@@ -58,5 +59,6 @@ def get_logs():
 
 
 if __name__ == '__main__':
-    http_server = WSGIServer(('', 5000), app, log=app.logger)
+    http_server = WSGIServer(('', 5000), app)
+    logging.debug("App running on PORT: 5000")
     http_server.serve_forever()
