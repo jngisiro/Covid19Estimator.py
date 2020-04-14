@@ -5,6 +5,7 @@ from json import loads
 from dicttoxml import dicttoxml
 from flask import request, jsonify, send_from_directory, make_response, render_template, url_for
 from gevent.pywsgi import WSGIServer
+from time import strftime
 
 from estimator import estimator
 
@@ -61,17 +62,17 @@ def get_logs():
 
 
 @app.after_request
-def after_request(response)
-   if response.status_code != 500:
+def after_request(response):
+    if response.status_code != 500:
         ts = strftime('[%Y-%b-%d %H:%M]')
-        logger.debug('%s %s %s %s %s %s',
-                     ts,
-                     request.remote_addr,
-                     request.method,
-                     request.scheme,
-                     request.full_path,
-                     response.status)
-    return response
+        logging.debug('%s %s %s %s %s %s',
+                      ts,
+                      request.remote_addr,
+                      request.method,
+                      request.scheme,
+                      request.full_path,
+                      response.status)
+        return response
 
 
 if __name__ == '__main__':
