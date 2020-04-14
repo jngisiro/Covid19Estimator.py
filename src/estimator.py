@@ -56,7 +56,7 @@ def estimator(data):
     severe_cases_for_ventilators_by_requested_time = int(0.02 *
                                                          severe_infections_by_requested_time)
 
-    # Dollars in Flight for both mild and severe impact scenarios
+    # Dollars in Flight for both mild and severe impact scenarios.
     mild_dollars_in_flight = int((mild_infections_by_requested_time * data["region"]["avgDailyIncomePopulation"] *
                                   data["region"]["avgDailyIncomeInUSD"]) / number_of_days_in_period(data["periodType"], data["timeToElapse"]))
 
