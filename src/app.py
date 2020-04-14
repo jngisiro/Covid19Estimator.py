@@ -57,7 +57,6 @@ def get_logs():
     logs = open("access.log", "r")
     response = make_response(logs.read())
     response.mimetype = "text/plain"
-    logging.debug("App running on PORT: 5000")
     return response
 
 
