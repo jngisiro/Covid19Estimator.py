@@ -1,0 +1,105 @@
+<form class="form">
+  <!-- Population Label -->
+  <label for="population">
+    Population
+    <span class="required">
+      (required)
+    </span>
+
+    <span class="error-message">
+      You must input Population
+    </span>
+
+    <input
+      id="population"
+      name="population"
+      data-population
+      required=""
+      type="text"
+    />
+  </label>
+  <!-- End of Population -->
+
+  <!-- Time to elapse Label -->
+  <label for="timeToElapse">
+    Time to elapse
+    <span class="required">
+      (required)
+    </span>
+
+    <span class="error-message">
+      You must input Time to ellapse
+    </span>
+
+    <input
+      id="timeToElapse"
+      data-time-to-elapse
+      name="timeToElapse"
+      required=""
+      type="text"
+    />
+  </label>
+  <!-- End of Time to elapse -->
+
+  <!-- Reported Cases Label -->
+  <label for="reportedCases">
+    Reported Cases
+    <span class="required">
+      (required)
+    </span>
+
+    <span class="error-message">
+      You must input Time to ellapse
+    </span>
+
+    <input
+      id="reportedCases"
+      data-reported-cases
+      name="reportedCases"
+      required=""
+      type="text"
+    />
+  </label>
+  <!-- End of Reported Cases -->
+
+  <!-- Total Hospital Beds Label -->
+  <label for="totalHospitalBeds">
+    Total Hospital Beds
+    <span class="required">
+      (required)
+    </span>
+
+    <span class="error-message">
+      You must input Time to ellapse
+    </span>
+
+    <input
+      id="totalHospitalBeds"
+      data-total-hospital-beds
+      name="totalHospitalBeds"
+      required=""
+      type="text"
+    />
+  </label>
+  <!-- End of Total Hospital Beds -->
+
+  <!-- Label for Period Type -->
+  <label for="periodType"
+    >Choose from the following:
+    <span class="required">
+      (required)
+    </span>
+
+    <span class="error-message">
+      Please choose one of the following time periods.
+    </span>
+    <select data-period-type name="periodType" id="periodType">
+      <option value="days">Days</option>
+      <option value="weeks">Weeks</option>
+      <option value="months">Months</option>
+    </select>
+  </label>
+  <!-- End of Period Type -->
+
+  <input type="submit" value="Submit" data-go-estimate />
+</form>

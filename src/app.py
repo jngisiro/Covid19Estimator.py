@@ -3,7 +3,7 @@ import logging
 import logging.handlers
 from json import loads
 from dicttoxml import dicttoxml
-from flask import request, jsonify, send_from_directory, make_response
+from flask import request, jsonify, send_from_directory, make_response, render_template, url_for
 from gevent.pywsgi import WSGIServer
 
 from estimator import estimator
@@ -30,7 +30,7 @@ app.logger.addHandler(log_handler)
 
 @app.route("/", methods=["GET"])
 def index():
-    return "<h2>Covid 19 Estimator</h2>"
+    return render_template("index.html")
 
 
 @app.route("/api/v1/on-covid-19/", methods=["POST"])

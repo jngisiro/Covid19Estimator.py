@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="A Covid 19 estimator for access impact of the disease on health infrastructure and the economy"
+    />
+    <meta name="author" content="Paul Ngisiro" />
+    <meta
+      name="keywords"
+      content="Covid-19, Coronavirus, Africa, Estimator, Javascript"
+    />
+    <title>Covid 19 Estimator</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/styles.css")  }}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>Covid 19 Estimator</h1>
+      </header>
+
+      <main class="content">
+        {% block content %} {% endblock %}
+      </main>
+    </div>
+    <script src="{{ url_for("static", filename="js/script.js") }}"></script>
+  </body>
+</html>
