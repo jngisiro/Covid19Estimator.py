@@ -37,14 +37,14 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/api/v1/on-covid-19/", methods=["POST"])
-@app.route("/api/v1/on-covid-19/json/", methods=["POST"])
+@app.route("/api/v1/on-covid-19", methods=["POST"])
+@app.route("/api/v1/on-covid-19/json", methods=["POST"])
 def make_estimate():
     input_data = request.json
     return jsonify(estimator(input_data))
 
 
-@app.route("/api/v1/on-covid-19/xml/", methods=["POST"])
+@app.route("/api/v1/on-covid-19/xml", methods=["POST"])
 def make_estimate_json():
     input_data = request.json
     response = make_response(
@@ -53,7 +53,7 @@ def make_estimate_json():
     return response
 
 
-@app.route("/api/v1/on-covid-19/logs/", methods=["GET"])
+@app.route("/api/v1/on-covid-19/logs", methods=["GET"])
 def get_logs():
     logs = open("access.log", "r")
     response = make_response(logs.read())
