@@ -1,0 +1,7 @@
+[2020-Apr-14 20:33] ::1 POST http /api/v1/on-covid-19/? 200 OK
+[2020-Apr-14 20:33] ::1 POST http /api/v1/on-covid-19/json? 308 PERMANENT REDIRECT
+[2020-Apr-14 20:33] ::1 POST http /api/v1/on-covid-19/json/? 200 OK
+[2020-Apr-14 20:33] ::1 POST http /api/v1/on-covid-19/xml? 308 PERMANENT REDIRECT
+[2020-Apr-14 20:33] ::1 POST http /api/v1/on-covid-19/xml/? 200 OK
+[2020-Apr-14 20:33] ::1 GET http /api/v1/on-covid-19/logs? 308 PERMANENT REDIRECT
+[2020-Apr-14 20:33] ::1 GET http /api/v1/on-covid-19/logs/? 200 OK

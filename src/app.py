@@ -29,7 +29,7 @@ app = flask.Flask(__name__)
 # app.logger.addHandler(log_handler)
 
 logging.basicConfig(filename="access.log",
-                    level=logging.DEBUG, format="%(message)s")
+                    level=logging.CRITICAL, format="%(message)s")
 
 
 @app.route("/", methods=["GET"])
@@ -61,17 +61,25 @@ def get_logs():
     return response
 
 
+@app.route("/ap1/v1/on-covid-19/logs/delete", methods=["DELETE"])
+def delete_logs():
+    log = open("access.log", 'w')
+    log.seek(0)
+    log.truncate()
+    log.close()
+
+
 @app.after_request
 def after_request(response):
     if response.status_code != 500:
         ts = strftime('[%Y-%b-%d %H:%M]')
-        logging.debug('%s %s %s %s %s %s',
-                      ts,
-                      request.remote_addr,
-                      request.method,
-                      request.scheme,
-                      request.full_path,
-                      response.status)
+        logging.critical('%s %s %s %s %s %s',
+                         ts,
+                         request.remote_addr,
+                         request.method,
+                         request.scheme,
+                         request.full_path,
+                         response.status)
         return response
 
 
