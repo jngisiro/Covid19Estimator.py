@@ -27,7 +27,7 @@ app = flask.Flask(__name__)
 # app.logger.setLevel(logging.DEBUG)  
 # app.logger.addHandler(log_handler)
 
-logging.basicConfig(filename="access.log", level=logging.DEBUG, format="%(asctime)s:%(levelname)s:%(message)s")
+logging.basicConfig(filename="access.log", level=logging.DEBUG, format="%(message)s")
 
 @app.route("/", methods=["GET"])
 def index():
